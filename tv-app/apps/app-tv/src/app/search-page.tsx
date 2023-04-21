@@ -17,11 +17,48 @@ const SearchTitle = styled.h1`
   margin-bottom: 20px;
 `;
 
+const Button = styled.button`
+  background: #FF4742;
+  border: 1px solid #FF4742;
+  border-radius: 6px;
+  box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+  box-sizing: border-box;
+  color: #FFFFFF;
+  cursor: pointer;
+  display: inline-block;
+  font-family: nunito,roboto,proxima-nova,"proxima nova",sans-serif;
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 16px;
+  min-height: 40px;
+  outline: 0;
+  padding: 12px 14px;
+  text-align: center;
+  text-rendering: geometricprecision;
+  text-transform: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: middle;
+}
+
+:hover,:active {
+  background-color: initial;
+  background-position: 0 0;
+  color: #FF4742;
+}
+
+:active {
+  opacity: .5;
+}
+`;
+
 const SearchInput = styled.input`
   padding: 10px;
   font-size: 16px;
   border: none;
   border-radius: 5px;
+  margin-right: 20px;
   margin-bottom: 20px;
   box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
   width: 300px;
@@ -87,7 +124,7 @@ function SearchPage() {
           value={query}
           onChange={(event) => setQuery(event.target.value)}
         />
-        <button type="submit">Search</button>
+        <Button type="submit">Search</Button>
       </form>
       {results && (
         <SearchResultsContainer>
