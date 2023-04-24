@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
 import { search }  from '@tv-app/tmdb-api';
 import { Link } from 'react-router-dom'
+import SeenMovies from './seenMovies-page'
 
 const SearchContainer = styled.div`
   display: flex;
@@ -81,7 +82,8 @@ const SearchResultTitle = styled.h3`
   margin-top: 10px;
 `;
 
-interface SearchResult {
+export interface SearchResult {
+  seen: boolean | undefined;
   id: number;
   title?: string;
   name?: string;
@@ -90,6 +92,7 @@ interface SearchResult {
 
 function SearchPage() {
   const [results, setResults] = useState<SearchResult[]>([]);
+  const [updatedResults, setUpdatedResults] = useState<SearchResult[]>([]); // New state for seen movies
   const {
     register,
     handleSubmit,
@@ -99,6 +102,18 @@ function SearchPage() {
   const onSubmit = async (data: { query: string }) => {
     const results = await search(data.query);
     setResults(results);
+  };
+
+  const markResultAsSeen = (resultId: number) => {
+    // Update the result in the `results` array to indicate it has been seen
+    const updatedResults = results.map((result) => {
+      if (result.id === resultId) {
+        return { ...result, seen: true };
+      }
+      return result;
+    });
+    setResults(updatedResults);
+    setUpdatedResults(updatedResults.filter((result) => result.seen)); // Update the seen movies state
   };
 
   return (
@@ -130,12 +145,17 @@ function SearchPage() {
               <SearchResultTitle>
                 {result.title || result.name}
               </SearchResultTitle>
+              <Button disabled={result.seen} onClick={() => markResultAsSeen(result.id)}>
+                {result.seen ? 'Seen' : 'Mark as seen'}
+              </Button>
             </SearchResult>
           ))}
         </SearchResultsContainer>
       )}
+      {updatedResults.length > 0 && <SeenMovies updatedResults={updatedResults} />} {/* Show the seen movies component if there are any */}
     </SearchContainer>
   );
 }
+
 
 export default SearchPage;

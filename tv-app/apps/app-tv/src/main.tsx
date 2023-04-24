@@ -6,7 +6,7 @@ import {
 } from "react-router-dom";
 
 import SearchPage from "./app/search-page";
-import InformationPage from './app/information-page'
+import SeenMovies from './app/seenMovies-page'
 import ErrorPage from "./app/error-page";
 
 const router = createBrowserRouter([
@@ -17,7 +17,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/information",
-    element: <InformationPage />,
+    element: <SeenMovies updatedResults={[]} />,
     errorElement: <ErrorPage />
   },
 ]);
