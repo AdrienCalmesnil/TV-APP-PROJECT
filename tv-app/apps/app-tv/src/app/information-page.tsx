@@ -1,12 +1,12 @@
 import React from 'react';
 
-function AboutPage() {
+function InformationPage() {
   return (
     <div>
-      <h1>About Page</h1>
-      <p>This is the about page.</p>
+      <h1>Information Page</h1>
+      <p>This is the Information page.</p>
     </div>
   );
 }
 
-export default AboutPage;
+export default InformationPage;
