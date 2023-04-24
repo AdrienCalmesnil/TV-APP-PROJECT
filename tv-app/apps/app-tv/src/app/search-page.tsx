@@ -103,6 +103,7 @@ function SearchPage() {
 
   return (
     <SearchContainer>
+      <Button type="submit">About</Button>
       <SearchTitle>Search for Movies and Series</SearchTitle>
       <form onSubmit={handleSubmit(onSubmit)}>
         <SearchInput
