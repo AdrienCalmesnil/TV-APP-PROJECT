@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
 
 const API_KEY = '44939c2eaad9e8d15f23cf86e5f8babe';
@@ -22,23 +23,13 @@ const Button = styled.button`
   border: 1px solid #FF4742;
   border-radius: 6px;
   box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
-  box-sizing: border-box;
   color: #FFFFFF;
   cursor: pointer;
-  display: inline-block;
-  font-family: nunito,roboto,proxima-nova,"proxima nova",sans-serif;
   font-size: 16px;
   font-weight: 800;
   line-height: 16px;
   min-height: 40px;
-  outline: 0;
   padding: 12px 14px;
-  text-align: center;
-  text-rendering: geometricprecision;
-  text-transform: none;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
   vertical-align: middle;
 }
 
@@ -90,10 +81,6 @@ const SearchResultTitle = styled.h3`
   margin-top: 10px;
 `;
 
-interface SearchResponse {
-  results: SearchResult[];
-}
-
 interface SearchResult {
   id: number;
   title?: string;
@@ -102,29 +89,32 @@ interface SearchResult {
 }
 
 function SearchPage() {
-  const [query, setQuery] = useState('');
   const [results, setResults] = useState<SearchResult[]>([]);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<{ query: string }>();
 
-  const search = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+  const onSubmit = async (data: { query: string }) => {
     const response = await fetch(
-      `${API_URL}?api_key=${API_KEY}&query=${query}`
+      `${API_URL}?api_key=${API_KEY}&query=${data.query}`
     );
-    const data = await response.json();
-    setResults(data.results);
+    const responseData = await response.json();
+    setResults(responseData.results);
   };
 
   return (
     <SearchContainer>
       <SearchTitle>Search for Movies and Series</SearchTitle>
-      <form onSubmit={search}>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <SearchInput
           type="text"
           placeholder="Enter movie or series name"
-          value={query}
-          onChange={(event) => setQuery(event.target.value)}
+          {...register('query', { required: true })}
         />
         <Button type="submit">Search</Button>
+        {errors.query && <span>This field is required</span>}
       </form>
       {results && (
         <SearchResultsContainer>
@@ -134,13 +124,15 @@ function SearchPage() {
                 src={`https://image.tmdb.org/t/p/w500/${result.poster_path}`}
                 alt={result.title || result.name}
               />
-              <SearchResultTitle>{result.title || result.name}</SearchResultTitle>
+              <SearchResultTitle>
+                {result.title || result.name}
+              </SearchResultTitle>
             </SearchResult>
           ))}
         </SearchResultsContainer>
       )}
     </SearchContainer>
   );
-};
+}
 
 export default SearchPage;
