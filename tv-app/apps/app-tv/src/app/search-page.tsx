@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
 import { search }  from '@tv-app/tmdb-api';
+import { Link } from 'react-router-dom'
 
 const SearchContainer = styled.div`
   display: flex;
@@ -103,7 +104,8 @@ function SearchPage() {
 
   return (
     <SearchContainer>
-      <Button type="submit">About</Button>
+      <Link to="/information"><Button type="submit">About</Button></Link>
+      
       <SearchTitle>Search for Movies and Series</SearchTitle>
       <form onSubmit={handleSubmit(onSubmit)}>
         <SearchInput
