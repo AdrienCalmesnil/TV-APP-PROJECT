@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
-
-const API_KEY = '44939c2eaad9e8d15f23cf86e5f8babe';
-const API_URL = 'https://api.themoviedb.org/3/search/multi';
+import { search }  from '@tv-app/tmdb-api';
 
 const SearchContainer = styled.div`
   display: flex;
@@ -97,11 +95,8 @@ function SearchPage() {
   } = useForm<{ query: string }>();
 
   const onSubmit = async (data: { query: string }) => {
-    const response = await fetch(
-      `${API_URL}?api_key=${API_KEY}&query=${data.query}`
-    );
-    const responseData = await response.json();
-    setResults(responseData.results);
+    const results = await search(data.query);
+    setResults(results);
   };
 
   return (
