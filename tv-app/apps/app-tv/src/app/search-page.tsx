@@ -61,16 +61,17 @@ const SearchResultsContainer = styled.div`
 `;
 
 const SearchResult = styled.div`
-  margin: 10px;
+  margin: 40px 40px 80px;
   width: 200px;
   height: 300px;
 `;
 
 const SearchResultImage = styled.img`
   width: 100%;
-  height: 80%;
+  height: 100%;
   object-fit: cover;
   border-radius: 5px;
+  box-shadow: 0px 0px 8px 0px #000000;
 `;
 
 const SearchResultTitle = styled.h3`
@@ -96,6 +97,7 @@ function SearchPage() {
 
   const onSubmit = async (data: { query: string }) => {
     const results = await search(data.query);
+    console.log(results)
     setResults(results);
   };
 
@@ -116,7 +118,11 @@ function SearchPage() {
           {results.map((result) => (
             <SearchResult key={result.id}>
               <SearchResultImage
-                src={`https://image.tmdb.org/t/p/w500/${result.poster_path}`}
+                src={
+                  result.poster_path
+                  ? `https://image.tmdb.org/t/p/w500/${result.poster_path}`
+                  : `https://creol.ucf.edu/wp-content/uploads/sites/2/2018/11/No-Image-Available-200x300.jpg`
+                }
                 alt={result.title || result.name}
               />
               <SearchResultTitle>
