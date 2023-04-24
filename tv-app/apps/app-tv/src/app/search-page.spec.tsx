@@ -1,15 +1,15 @@
 import { render } from "@testing-library/react";
 
-import App from "./app";
+import SearchPage from "./search-page";
 
-describe("App", () => {
+describe("SearchPage", () => {
   it("should render successfully", () => {
-    const { baseElement } = render(<App />);
+    const { baseElement } = render(<SearchPage />);
     expect(baseElement).toBeTruthy();
   });
 
   it("should have a greeting as the title", () => {
-    const { getByText } = render(<App />);
+    const { getByText } = render(<SearchPage />);
     expect(getByText(/Welcome app-tv/gi)).toBeTruthy();
   });
 });

@@ -98,13 +98,12 @@ function SearchPage() {
 
   const onSubmit = async (data: { query: string }) => {
     const results = await search(data.query);
-    console.log(results)
     setResults(results);
   };
 
   return (
     <SearchContainer>
-      <Link to="/information"><Button type="submit">About</Button></Link>
+      <Link to="/information"><Button type="submit">Information</Button></Link>
       
       <SearchTitle>Search for Movies and Series</SearchTitle>
       <form onSubmit={handleSubmit(onSubmit)}>
