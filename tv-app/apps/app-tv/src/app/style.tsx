@@ -65,3 +65,29 @@ export const Button = styled.button`
     opacity: .5;
     }
 `;
+
+export const ButtonSecondary = styled.button`
+    background: initial;
+    border: 1px solid #FF4742;
+    border-radius: 6px;
+    box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+    color: #FF4742;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 800;
+    line-height: 16px;
+    min-height: 40px;
+    padding: 12px 14px;
+    vertical-align: middle;
+    }
+
+    :hover,:active {
+    background-color: #FF4742;
+    background-position: 0 0;
+    color: #FFFFFF;
+    }
+
+    :active {
+    opacity: .5;
+    }
+`;

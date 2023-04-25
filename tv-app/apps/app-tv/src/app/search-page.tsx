@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { search } from '@tv-app/tmdb-api';
 import { Link } from 'react-router-dom';
 import SeenMovies from './seenMovies-page';
-import { Container, Title, ResultsContainer, Result, ResultImage, ResultTitle, Button } from './style';
+import { Container, Title, ResultsContainer, Result, ResultImage, ResultTitle, Button, ButtonSecondary } from './style';
 
 const SearchInput = styled.input`
   padding: 10px;
@@ -80,12 +80,12 @@ function SearchPage() {
               <ResultTitle>
                 {result.title || result.name}
               </ResultTitle>
-              <Button
+              <ButtonSecondary
                 disabled={result.seen}
                 onClick={() => markResultAsSeen(result.id)}
               >
                 {result.seen ? 'Seen' : 'Mark as seen'}
-              </Button>
+              </ButtonSecondary>
             </Result>
           ))}
         </ResultsContainer>
