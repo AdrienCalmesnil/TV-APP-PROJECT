@@ -52,7 +52,7 @@ function SearchPage() {
 
   return (
     <Container>
-      <Link to="/information">
+      <Link to="/wishlist">
         <Button type="submit">Information</Button>
       </Link>
       <Title>Search for Movies and Series</Title>
@@ -91,7 +91,7 @@ function SearchPage() {
         </ResultsContainer>
       )}
       {updatedResults.length > 0 && (
-        <SeenMovies updatedResults={updatedResults} />
+        <SeenMovies results={updatedResults} />
       )}{' '}
       {/* Show the seen movies component if there are any */}
     </Container>

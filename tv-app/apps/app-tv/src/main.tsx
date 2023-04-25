@@ -16,8 +16,8 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />
   },
   {
-    path: "/information",
-    element: <SeenMovies updatedResults={[]} />,
+    path: "/wishlist",
+    element: <SeenMovies results={[]} />,
     errorElement: <ErrorPage />
   },
 ]);
