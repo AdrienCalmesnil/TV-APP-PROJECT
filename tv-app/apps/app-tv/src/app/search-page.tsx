@@ -1,22 +1,10 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
-import { search }  from '@tv-app/tmdb-api';
-import { Link } from 'react-router-dom'
-import SeenMovies from './seenMovies-page'
-
-const SearchContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 50px;
-`;
-
-const SearchTitle = styled.h1`
-  font-family: Arial;
-  font-size: 36px;
-  margin-bottom: 20px;
-`;
+import { search } from '@tv-app/tmdb-api';
+import { Link } from 'react-router-dom';
+import SeenMovies from './seenMovies-page';
+import { Container, Title, ResultsContainer, Result, ResultImage, ResultTitle } from './style';
 
 const Button = styled.button`
   background: #FF4742;
@@ -55,33 +43,6 @@ const SearchInput = styled.input`
   width: 300px;
 `;
 
-const SearchResultsContainer = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin-top: 20px;
-`;
-
-const SearchResult = styled.div`
-  margin: 40px 40px 80px;
-  width: 200px;
-  height: 300px;
-`;
-
-const SearchResultImage = styled.img`
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 5px;
-  box-shadow: 0px 0px 8px 0px #000000;
-`;
-
-const SearchResultTitle = styled.h3`
-  font-family: Arial;
-  font-size: 16px;
-  margin-top: 10px;
-`;
-
 export interface SearchResult {
   seen: boolean | undefined;
   id: number;
@@ -117,10 +78,11 @@ function SearchPage() {
   };
 
   return (
-    <SearchContainer>
-      <Link to="/information"><Button type="submit">Information</Button></Link>
-      
-      <SearchTitle>Search for Movies and Series</SearchTitle>
+    <Container>
+      <Link to="/information">
+        <Button type="submit">Information</Button>
+      </Link>
+      <Title>Search for Movies and Series</Title>
       <form onSubmit={handleSubmit(onSubmit)}>
         <SearchInput
           type="text"
@@ -131,31 +93,36 @@ function SearchPage() {
         {errors.query && <span>This field is required</span>}
       </form>
       {results && (
-        <SearchResultsContainer>
+        <ResultsContainer>
           {results.map((result) => (
-            <SearchResult key={result.id}>
-              <SearchResultImage
+            <Result key={result.id}>
+              <ResultImage
                 src={
                   result.poster_path
-                  ? `https://image.tmdb.org/t/p/w500/${result.poster_path}`
-                  : `https://creol.ucf.edu/wp-content/uploads/sites/2/2018/11/No-Image-Available-200x300.jpg`
+                    ? `https://image.tmdb.org/t/p/w500/${result.poster_path}`
+                    : `https://creol.ucf.edu/wp-content/uploads/sites/2/2018/11/No-Image-Available-200x300.jpg`
                 }
                 alt={result.title || result.name}
               />
-              <SearchResultTitle>
+              <ResultTitle>
                 {result.title || result.name}
-              </SearchResultTitle>
-              <Button disabled={result.seen} onClick={() => markResultAsSeen(result.id)}>
+              </ResultTitle>
+              <Button
+                disabled={result.seen}
+                onClick={() => markResultAsSeen(result.id)}
+              >
                 {result.seen ? 'Seen' : 'Mark as seen'}
               </Button>
-            </SearchResult>
+            </Result>
           ))}
-        </SearchResultsContainer>
+        </ResultsContainer>
       )}
-      {updatedResults.length > 0 && <SeenMovies updatedResults={updatedResults} />} {/* Show the seen movies component if there are any */}
-    </SearchContainer>
+      {updatedResults.length > 0 && (
+        <SeenMovies updatedResults={updatedResults} />
+      )}{' '}
+      {/* Show the seen movies component if there are any */}
+    </Container>
   );
 }
-
 
 export default SearchPage;

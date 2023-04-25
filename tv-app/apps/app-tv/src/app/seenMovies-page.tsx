@@ -1,45 +1,5 @@
 import { SearchResult } from './search-page';
-import styled from 'styled-components';
-
-const SeenMoviesTitle = styled.h2`
-  font-family: Arial;
-  font-size: 36px;
-  margin-bottom: 20px;
-`;
-
-const SeenMoviesContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 50px;
-`;
-
-const SeenMoviesResultsContainer = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin-top: 20px;
-`;
-
-const SeenMoviesResult = styled.div`
-  margin: 40px 40px 80px;
-  width: 200px;
-  height: 300px;
-`;
-
-const SeenMoviesResultImage = styled.img`
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 5px;
-  box-shadow: 0px 0px 8px 0px #000000;
-`;
-
-const SeenMoviesResultTitle = styled.h3`
-  font-family: Arial;
-  font-size: 16px;
-  margin-top: 10px;
-`;
+import { Container, Title, ResultsContainer, Result, ResultImage, ResultTitle } from './style';
 
 interface SeenMoviesProps {
   updatedResults: SearchResult[];
@@ -50,12 +10,12 @@ export default function SeenMovies({ updatedResults }: SeenMoviesProps) {
   console.log(seenMovies)
 
   return (
-    <SeenMoviesContainer>
-      <SeenMoviesTitle>Seen Movies</SeenMoviesTitle>
-      <SeenMoviesResultsContainer>
+    <Container>
+      <Title>Seen Movies</Title>
+      <ResultsContainer>
         {seenMovies.map((movie) => (
-          <SeenMoviesResult key={movie.id}>
-            <SeenMoviesResultImage
+          <Result key={movie.id}>
+            <ResultImage
               src={
                 movie.poster_path
                 ? `https://image.tmdb.org/t/p/w500/${movie.poster_path}` 
@@ -63,10 +23,10 @@ export default function SeenMovies({ updatedResults }: SeenMoviesProps) {
               }
               alt={movie.title || movie.name}
             />
-            <SeenMoviesResultTitle>{movie.title || movie.name}</SeenMoviesResultTitle>
-          </SeenMoviesResult>
+            <ResultTitle>{movie.title || movie.name}</ResultTitle>
+          </Result>
         ))}
-      </SeenMoviesResultsContainer>
-    </SeenMoviesContainer>
+      </ResultsContainer>
+    </Container>
   );
 }
