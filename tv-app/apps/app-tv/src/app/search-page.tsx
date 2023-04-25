@@ -4,33 +4,7 @@ import styled from 'styled-components';
 import { search } from '@tv-app/tmdb-api';
 import { Link } from 'react-router-dom';
 import SeenMovies from './seenMovies-page';
-import { Container, Title, ResultsContainer, Result, ResultImage, ResultTitle } from './style';
-
-const Button = styled.button`
-  background: #FF4742;
-  border: 1px solid #FF4742;
-  border-radius: 6px;
-  box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
-  color: #FFFFFF;
-  cursor: pointer;
-  font-size: 16px;
-  font-weight: 800;
-  line-height: 16px;
-  min-height: 40px;
-  padding: 12px 14px;
-  vertical-align: middle;
-}
-
-:hover,:active {
-  background-color: initial;
-  background-position: 0 0;
-  color: #FF4742;
-}
-
-:active {
-  opacity: .5;
-}
-`;
+import { Container, Title, ResultsContainer, Result, ResultImage, ResultTitle, Button } from './style';
 
 const SearchInput = styled.input`
   padding: 10px;
@@ -42,7 +16,6 @@ const SearchInput = styled.input`
   box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
   width: 300px;
 `;
-
 export interface SearchResult {
   seen: boolean | undefined;
   id: number;
