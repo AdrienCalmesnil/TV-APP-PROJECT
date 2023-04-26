@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/accessible-emoji */
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
@@ -12,6 +13,7 @@ import {
   ResultTitle,
   Button,
   ButtonSecondary,
+  BottomRightBtn,
 } from './style';
 
 const SearchInput = styled.input`
@@ -74,7 +76,7 @@ function SearchPage() {
   return (
     <Container>
       <Link to="/seenMovies">
-        <Button type="submit">Seen Movies</Button>
+        <BottomRightBtn type="submit">Seen Movies 👉</BottomRightBtn>
       </Link>
       <Title>Search for Movies and Series</Title>
       <form onSubmit={handleSubmit(onSubmit)}>

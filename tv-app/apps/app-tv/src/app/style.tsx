@@ -92,3 +92,15 @@ export const ButtonSecondary = styled.button`
     opacity: .5;
     }
 `;
+
+export const BottomLeftBtn = styled(Button)`
+  position: fixed;
+  bottom: 10%;
+  left: 5%;
+`
+
+export const BottomRightBtn = styled(Button)`
+  position: fixed;
+  bottom: 10%;
+  right: 5%;
+`

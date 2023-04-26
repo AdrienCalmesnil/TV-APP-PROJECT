@@ -1,6 +1,7 @@
+/* eslint-disable jsx-a11y/accessible-emoji */
 import { Link } from 'react-router-dom';
 import { SearchResult } from './search-page';
-import { Container, Title, ResultsContainer, Result, ResultImage, ResultTitle, Button } from './style';
+import { Container, Title, ResultsContainer, Result, ResultImage, ResultTitle, BottomLeftBtn } from './style';
 
 export default function SeenMovies() {
   const updatedResultsFromLocalStorage = localStorage.getItem('updatedResults');
@@ -9,7 +10,7 @@ export default function SeenMovies() {
   return (
     <Container>
       <Link to="/">
-        <Button type="submit">Search Page</Button>
+        <BottomLeftBtn type="submit">👈 Search Page</BottomLeftBtn>
       </Link>
       <Title>Seen Movies</Title>
       <ResultsContainer>
