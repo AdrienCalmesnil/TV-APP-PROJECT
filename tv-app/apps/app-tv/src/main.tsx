@@ -17,7 +17,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/seenMovies",
-    element: <SeenMovies results={[]} />,
+    element: <SeenMovies />,
     errorElement: <ErrorPage />
   },
 ]);

@@ -3,7 +3,16 @@ import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
 import { search } from '@tv-app/tmdb-api';
 import { Link } from 'react-router-dom';
-import { Container, Title, ResultsContainer, Result, ResultImage, ResultTitle, Button, ButtonSecondary } from './style';
+import {
+  Container,
+  Title,
+  ResultsContainer,
+  Result,
+  ResultImage,
+  ResultTitle,
+  Button,
+  ButtonSecondary,
+} from './style';
 
 const SearchInput = styled.input`
   padding: 10px;
@@ -59,7 +68,7 @@ function SearchPage() {
 
   // Save updated results to local storage when the state is updated
   useEffect(() => {
-    localStorage.setItem('updatedResults', JSON.stringify(updatedResults));
+    localStorage.setItem('updatedResults', JSON.stringify(updatedResults))
   }, [updatedResults]);
 
   return (
@@ -71,7 +80,11 @@ function SearchPage() {
       <form onSubmit={handleSubmit(onSubmit)}>
         <SearchInput
           type="text"
-          placeholder={errors.query ? "This field is required" : "Enter movie or series name"}
+          placeholder={
+            errors.query
+              ? 'This field is required'
+              : 'Enter movie or series name'
+          }
           {...register('query', { required: true })}
         />
         <Button type="submit">Search</Button>
@@ -89,9 +102,7 @@ function SearchPage() {
                 }
                 alt={result.title || result.name}
               />
-              <ResultTitle>
-                {result.title || result.name}
-              </ResultTitle>
+              <ResultTitle>{result.title || result.name}</ResultTitle>
               <ButtonSecondary
                 disabled={result.seen}
                 onClick={() => markResultAsSeen(result.id)}
