@@ -3,7 +3,6 @@ import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
 import { search } from '@tv-app/tmdb-api';
 import { Link } from 'react-router-dom';
-import SeenMovies from './seenMovies-page';
 import { Container, Title, ResultsContainer, Result, ResultImage, ResultTitle, Button, ButtonSecondary } from './style';
 
 const SearchInput = styled.input`
@@ -72,11 +71,11 @@ function SearchPage() {
       <form onSubmit={handleSubmit(onSubmit)}>
         <SearchInput
           type="text"
-          placeholder="Enter movie or series name"
+          placeholder={errors.query ? "This field is required" : "Enter movie or series name"}
           {...register('query', { required: true })}
         />
         <Button type="submit">Search</Button>
-        {errors.query && <span>This field is required</span>}
+        {errors.query && <span> This field is required</span>}
       </form>
       {results && (
         <ResultsContainer>
@@ -103,10 +102,6 @@ function SearchPage() {
           ))}
         </ResultsContainer>
       )}
-      {updatedResults.length > 0 && (
-        <SeenMovies results={updatedResults} />
-      )}{' '}
-      {/* Show the seen movies component if there are any */}
     </Container>
   );
 }
