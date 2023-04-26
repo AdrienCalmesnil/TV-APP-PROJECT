@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
 import { search } from '@tv-app/tmdb-api';
@@ -46,14 +46,27 @@ function SearchPage() {
       }
       return result;
     });
-    setResults(updatedResults);
+    setResults(updatedResults); //  update state of results with list updated
     setUpdatedResults(updatedResults.filter((result) => result.seen)); // Update the seen movies state
   };
 
+  // Get updated results from local storage when the component mounts
+  useEffect(() => {
+    const storedResults = localStorage.getItem('updatedResults');
+    if (storedResults) {
+      setUpdatedResults(JSON.parse(storedResults));
+    }
+  }, []);
+
+  // Save updated results to local storage when the state is updated
+  useEffect(() => {
+    localStorage.setItem('updatedResults', JSON.stringify(updatedResults));
+  }, [updatedResults]);
+
   return (
     <Container>
-      <Link to="/wishlist">
-        <Button type="submit">Information</Button>
+      <Link to="/seenMovies" state={{updatedResults: updatedResults}}>
+        <Button type="submit">Seen Movies</Button>
       </Link>
       <Title>Search for Movies and Series</Title>
       <form onSubmit={handleSubmit(onSubmit)}>

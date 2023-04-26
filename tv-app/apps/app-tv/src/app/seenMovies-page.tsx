@@ -7,7 +7,7 @@ interface SeenMoviesProps {
 
 export default function SeenMovies({ results }: SeenMoviesProps) {
   const seenMovies = results.filter((result) => result.seen);
-  console.log(seenMovies)
+  console.log(seenMovies, "ouioui")
 
   return (
     <Container>
