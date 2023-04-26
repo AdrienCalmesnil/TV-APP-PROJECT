@@ -65,7 +65,7 @@ function SearchPage() {
 
   return (
     <Container>
-      <Link to="/seenMovies" state={{updatedResults: updatedResults}}>
+      <Link to="/seenMovies">
         <Button type="submit">Seen Movies</Button>
       </Link>
       <Title>Search for Movies and Series</Title>
